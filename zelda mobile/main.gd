@@ -38,7 +38,7 @@ func _process(delta):
 
 func _on_host_button_up():
 	m.peer_connected.connect(addPlayer)
-	
+	m.peer_disconnected.connect(removePlayer)
 	m.create_server(6969)
 	multiplayer.multiplayer_peer=m
 	$gui/Panel.hide()
@@ -53,10 +53,11 @@ func _on_join_button_up():
 	$gui/Panel/VBoxContainer/ip.text=rectify($gui/Panel/VBoxContainer/ip.text)
 	var t:String=$gui/Panel/VBoxContainer/ip.text
 
-	if not (decode(t).is_valid_ip_address(  ) or  t==""):
+	if not decode(t).is_valid_ip_address():
+		print("Invalid IP: "+decode(t))
 		return
 	
-	m.create_client("192.168.190.210",6969)#"localhost" if t == "" else t,6969)
+	m.create_client(decode(t),6969)#"localhost" if t == "" else t,6969)
 	multiplayer.multiplayer_peer=m
 	multiplayer.server_disconnected.connect(server_gone)
 	
@@ -81,6 +82,9 @@ func server_gone():
 	
 func encode(ipa):
 	var ip=ipa.split(".")
+	if len(ip) != 4:
+		push_error("ip has more than 4 numbers")
+		return null
 	var str2=""
 	for i in ip:
 		str2+=AA(int(i))
@@ -93,12 +97,14 @@ func decode(ipa:String):
 	ipa=ipa.to_upper()
 	if len(ipa)==3 and ipa[0]=="Z" and tff(ipa[1]+ipa[2])<256:
 		return "192.168.1."+str(tff(ipa[1]+ipa[2]))
-	elif(len(ipa)):
+	elif(len(ipa)==8):
 		var p=""
 		for i in [0,2,4,6]:
 			p+=str(tff(ipa[i]+ipa[i+1]))+"."
 		p=p.rstrip(".")
 		return p
+	elif ipa =="":
+		return "127.0.0.1"
 			
 	
 	
@@ -133,7 +139,12 @@ func rectify(st:String):
 	for i in st:
 		if i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
 			t+=i
-			
+	if t=="":
+		return ""
 	return t
 	
 
+func removePlayer(id:int):
+	var no=get_node_or_null(str(id))
+	if no != null:
+		remove_child(no)

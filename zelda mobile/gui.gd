@@ -24,9 +24,9 @@ func _input(event):
 		$settings/VBoxContainer/HSplitContainer/HSlider.value=2
 func _physics_process(delta):
 	if Input.is_action_pressed("zoom in"):
-		$settings/VBoxContainer/HSplitContainer/HSlider.value+=0.01
+		$settings/VBoxContainer/HSplitContainer/HSlider.value+=0.6*delta
 	if Input.is_action_pressed("zoom out"):
-		$settings/VBoxContainer/HSplitContainer/HSlider.value-=0.01
+		$settings/VBoxContainer/HSplitContainer/HSlider.value-=0.6*delta
 	
 
 

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var healthBar=$CanvasLayer/healthbar
 
 
-const isPlayer = true
+var isPlayer = true
 const SPEED =60.0
 const chargeTime=1.0
 const zoomMin=0.5
@@ -67,6 +67,7 @@ func _ready():
 	position=Vector2(50,50)
 	set_multiplayer_authority(name.to_int())
 	if not is_multiplayer_authority():
+		isPlayer=false
 		$CanvasLayer.free()
 		$Camera2D.free()
 		
@@ -172,7 +173,7 @@ func playDamageAnimation():
 	$AnimationPlayer.play("hurt")
 	
 func changeZoom(zoom):
-	if $Camera2D !=null:
+	if isPlayer:
 		$Camera2D.zoom.x=clamp(zoom,zoomMin,zoomMax)
 		$Camera2D.zoom.y=clamp(zoom,zoomMin,zoomMax)
 	
