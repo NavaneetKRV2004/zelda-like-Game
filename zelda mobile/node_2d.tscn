@@ -1,0 +1,238 @@
+[gd_scene load_steps=8 format=3 uid="uid://d15t10mp3mjwc"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_13lwf"]
+[ext_resource type="PackedScene" uid="uid://ej2f6jve8nq1" path="res://tile_map.tscn" id="1_dji82"]
+[ext_resource type="Script" path="res://gui.gd" id="3_3qvht"]
+[ext_resource type="PackedScene" uid="uid://csv35bdkxpe7r" path="res://virtual_joystick.tscn" id="3_5vans"]
+[ext_resource type="Texture2D" uid="uid://bkvmydfn5saxg" path="res://textures/joystick_tip.png" id="4_jccm4"]
+[ext_resource type="Script" path="res://mainMenuCamera.gd" id="6_rhts8"]
+
+[sub_resource type="Curve2D" id="Curve2D_36lvd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -30, 32, 0, 0, 0, 0, 575, -14, 0, 0, 0, 0, 895, -51, -132.149, -26.6968, 132.149, 26.6968, 1452, -7, 0, 0, 0, 0, 1838, 116, -13.3484, -57.3981, 13.3484, 57.3981, 1952, 271, -4.00452, -137.488, 4.00452, 137.488, 1933, 607, 43.8406, -39.598, -43.8406, 39.598, 1926, 935, 93.3381, -1.41421, -93.3381, 1.41421, 1700, 985, 50.9117, 43.8406, -50.9117, -43.8406, 1529, 883, 0, 0, 0, 0, 1377, 612, 0, 0, 0, 0, 1296, 407, 168.01, -26.4285, -168.01, 26.4285, 1084, 340, 0, 0, 0, 0, 920, 400, 0, 0, 0, 0, 735, 478, 0, 0, 0, 0, 618, 507, 0, 0, 0, 0, 468, 528, 68.9028, 15.102, -68.9028, -15.102, 297, 514, 0, 0, 0, 0, 152, 388, 0, 0, 0, 0, 66, 264, 0, 0, 0, 0, 26, 157, 0, 0, 0, 0, -34, 48)
+}
+point_count = 22
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_13lwf")
+
+[node name="map" parent="." instance=ExtResource("1_dji82")]
+
+[node name="gui" type="CanvasLayer" parent="."]
+script = ExtResource("3_3qvht")
+
+[node name="Panel" type="Panel" parent="gui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.5
+offset_top = -113.5
+offset_right = 186.5
+offset_bottom = 113.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -33.0
+offset_right = 120.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="host" type="Button" parent="gui/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="join" type="Button" parent="gui/Panel/VBoxContainer"]
+layout_mode = 2
+text = "join"
+
+[node name="ip" type="TextEdit" parent="gui/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Enter Host address"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+
+[node name="hostip" type="Label" parent="gui/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="settings" type="Panel" parent="gui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -249.0
+offset_right = 506.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -33.0
+offset_right = 120.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="Label" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="CheckButton" type="CheckButton" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "On screen controls"
+
+[node name="AA" type="CheckButton" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "Anti Aliasing"
+
+[node name="LF" type="CheckButton" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "Linear Filtering"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Settings2" type="Label" parent="gui/settings/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+text = "Zoom
+"
+
+[node name="HSlider" type="HSlider" parent="gui/settings/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 4.0
+step = 0.01
+value = 2.0
+
+[node name="Main menu" type="Button" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "Main menu
+"
+
+[node name="quit" type="Button" parent="gui/settings/VBoxContainer"]
+layout_mode = 2
+text = "quit"
+
+[node name="players" type="Panel" parent="gui/settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -732.0
+offset_top = 4.0
+offset_right = -627.0
+offset_bottom = 164.0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="name" type="Label" parent="gui/settings/players"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 2.0
+offset_right = 94.0
+offset_bottom = 25.0
+text = "Players:"
+
+[node name="names" type="ItemList" parent="gui/settings/players"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.5
+offset_top = -136.0
+offset_right = 45.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+same_column_width = true
+
+[node name="Virtual Joystick" parent="gui" instance=ExtResource("3_5vans")]
+offset_top = -300.0
+offset_bottom = 0.0
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
+
+[node name="touchbuttons" type="HBoxContainer" parent="gui"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.016
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = 404.0
+offset_right = -16.384
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="attack" type="Button" parent="gui/touchbuttons"]
+layout_mode = 2
+icon = ExtResource("4_jccm4")
+
+[node name="roll" type="Button" parent="gui/touchbuttons"]
+layout_mode = 2
+icon = ExtResource("4_jccm4")
+
+[node name="SettingsToggle" type="Button" parent="gui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = 10.0
+offset_right = -13.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "O"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://link.tscn")
+spawn_path = NodePath("..")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_36lvd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-30, 32)
+rotation = -0.075887
+
+[node name="mmcam" type="Camera2D" parent="Path2D/PathFollow2D"]
+zoom = Vector2(2, 2)
+script = ExtResource("6_rhts8")
+
+[connection signal="child_entered_tree" from="." to="gui" method="updatePlayersList"]
+[connection signal="child_entered_tree" from="." to="Path2D/PathFollow2D/mmcam" method="_on_node_2d_child_entered_tree"]
+[connection signal="button_up" from="gui/Panel/VBoxContainer/host" to="." method="_on_host_button_up"]
+[connection signal="button_up" from="gui/Panel/VBoxContainer/join" to="." method="_on_join_button_up"]
+[connection signal="toggled" from="gui/settings/VBoxContainer/CheckButton" to="gui" method="_on_check_button_toggled"]
+[connection signal="toggled" from="gui/settings/VBoxContainer/AA" to="gui" method="_on_aa_toggled"]
+[connection signal="toggled" from="gui/settings/VBoxContainer/LF" to="gui" method="_on_lf_toggled"]
+[connection signal="value_changed" from="gui/settings/VBoxContainer/HSplitContainer/HSlider" to="gui" method="_on_h_slider_value_changed"]
+[connection signal="button_up" from="gui/settings/VBoxContainer/Main menu" to="gui" method="_on_main_menu_button_up"]
+[connection signal="button_up" from="gui/settings/VBoxContainer/quit" to="gui" method="_on_quit_button_up"]
+[connection signal="visibility_changed" from="gui/settings/players" to="gui" method="updatePlayersList"]
+[connection signal="button_down" from="gui/SettingsToggle" to="gui" method="_on_settings_button_down"]
