@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://brwqk3v4vrpww"]
+
+[ext_resource type="Script" uid="uid://b33hssksjv7ys" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bt0irdgdx8ixx" path="res://selection_wheel.gd" id="1_ig7tw"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="selection_wheel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 563.0
+offset_top = 298.0
+offset_right = 968.0
+offset_bottom = 600.0
+script = ExtResource("1_ig7tw")
+items_count = 8
+offset_percentage = 0.3
+radius = 135
+inner_circle_width = 10
+line_width = 2
+transparency = 0.4
+select_color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://bt0irdgdx8ixx"
+
+[connection signal="selected" from="selection_wheel" to="." method="_on_selection_wheel_selected"]
