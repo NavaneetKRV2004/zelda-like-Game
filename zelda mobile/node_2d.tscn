@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d15t10mp3mjwc"]
+[gd_scene load_steps=9 format=3 uid="uid://d15t10mp3mjwc"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_13lwf"]
 [ext_resource type="PackedScene" uid="uid://ej2f6jve8nq1" path="res://tile_map.tscn" id="1_dji82"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://csv35bdkxpe7r" path="res://virtual_joystick.tscn" id="3_5vans"]
 [ext_resource type="Texture2D" uid="uid://bkvmydfn5saxg" path="res://textures/joystick_tip.png" id="4_jccm4"]
 [ext_resource type="Script" path="res://mainMenuCamera.gd" id="6_rhts8"]
+[ext_resource type="PackedScene" uid="uid://dcr8rgb5u3ago" path="res://bomb.tscn" id="7_suce5"]
 
 [sub_resource type="Curve2D" id="Curve2D_36lvd"]
 _data = {
@@ -223,6 +224,9 @@ rotation = -0.075887
 [node name="mmcam" type="Camera2D" parent="Path2D/PathFollow2D"]
 zoom = Vector2(2, 2)
 script = ExtResource("6_rhts8")
+
+[node name="bomb" parent="." instance=ExtResource("7_suce5")]
+position = Vector2(-67, 1)
 
 [connection signal="child_entered_tree" from="." to="gui" method="updatePlayersList"]
 [connection signal="child_entered_tree" from="." to="Path2D/PathFollow2D/mmcam" method="_on_node_2d_child_entered_tree"]

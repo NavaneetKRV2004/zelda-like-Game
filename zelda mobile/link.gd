@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 
 var isPlayer = true
-const SPEED =60.0
+const SPEED =100.0
 const chargeTime=1.0
 const zoomMin=0.5
 const zoomMax=4
@@ -82,7 +82,7 @@ func _process(delta):
 	
 	if not is_multiplayer_authority(): 
 		return
-	$CanvasLayer/debug.text="Health: "+str(health)+"\nPosition: "+str(position)
+	updateDebug()
 	velocity=Vector2.ZERO
 	
 	rolling=Input.is_action_pressed("roll")
@@ -177,3 +177,5 @@ func changeZoom(zoom):
 		$Camera2D.zoom.x=clamp(zoom,zoomMin,zoomMax)
 		$Camera2D.zoom.y=clamp(zoom,zoomMin,zoomMax)
 	
+func updateDebug():
+	$CanvasLayer/debug.text="Health: "+str(health)+"\nPosition: (x:"+str(round(position.x))+" y:"+str(round(position.y))+")"

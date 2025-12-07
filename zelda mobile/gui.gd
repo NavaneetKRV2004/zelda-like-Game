@@ -24,10 +24,12 @@ func _input(event):
 		$settings/VBoxContainer/HSplitContainer/HSlider.value=2
 func _physics_process(delta):
 	if Input.is_action_pressed("zoom in"):
-		$settings/VBoxContainer/HSplitContainer/HSlider.value+=0.6*delta
+		$settings/VBoxContainer/HSplitContainer/HSlider.value+=1.2*delta
 	if Input.is_action_pressed("zoom out"):
-		$settings/VBoxContainer/HSplitContainer/HSlider.value-=0.6*delta
-	
+		$settings/VBoxContainer/HSplitContainer/HSlider.value-=1.2*delta
+	if Input.is_action_just_pressed("fullscreen"):
+		DisplayServer.window_set_mode(0 if DisplayServer.window_get_mode()==3 else 3)
+
 
 
 func _on_check_button_toggled(button_pressed):

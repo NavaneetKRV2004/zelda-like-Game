@@ -740,7 +740,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"sword_spin",
-"speed": 16.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -825,8 +825,8 @@ zoom = Vector2(2, 2)
 texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_juh8n")
-animation = &"sword_down"
-frame_progress = 0.505154
+animation = &"sword_spin"
+frame_progress = 0.0726948
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -847,12 +847,10 @@ disabled = true
 
 [node name="debug" type="Label" parent="CanvasLayer"]
 texture_filter = 2
-offset_left = 848.0
-offset_top = 5.0
-offset_right = 1017.0
-offset_bottom = 111.0
+offset_top = 399.0
+offset_right = 169.0
+offset_bottom = 505.0
 text = "Debug"
-horizontal_alignment = 2
 
 [node name="healthbar" parent="CanvasLayer" instance=ExtResource("5_0e6gr")]
 
